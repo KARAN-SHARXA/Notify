@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NotifyHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="main-center">
+    <!-- LOGIN -->
+    <section class="auth-card small-card" id="loginCard">
+      <h1 class="brand">NotifyHub</h1>
+      <p class="sub">Admin Login</p>
+      <div class="auth-form">
+        <input id="username" placeholder="Username" autocomplete="off" />
+        <input id="password" placeholder="Password" type="password" />
+        <div class="row">
+          <button class="btn primary" onclick="login()">Sign In</button>
+          <button class="btn ghost" onclick="toggleRegister()">Sign Up</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section class="auth-card small-card hidden" id="registerCard">
+      <h2>Create Account</h2>
+      <div class="auth-form">
+        <input id="regUsername" placeholder="Choose username" autocomplete="off" />
+        <input id="regPassword" placeholder="Choose password" type="password" />
+        <div class="row">
+          <button class="btn primary" onclick="register()">Create</button>
+          <button class="btn ghost" onclick="toggleRegister()">Back</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN PANEL -->
+    <section class="card panel hidden" id="adminPanel">
+      <header class="panel-header">
+        <div>
+          <h2>Command Hub</h2>
+          <p class="small muted">Now you can post updates, pin important, manage all the updates.</p>
+        </div>
+        <div class="controls">
+          <input id="searchInput" placeholder="Search updates..." oninput="searchNotices()" />
+          <button class="btn danger" onclick="signOut()">Sign Out</button>
+        </div>
+      </header>
+
+      <div class="post-area">
+        <textarea id="noticeText" placeholder="Write your notice..." rows="4"></textarea>
+        <div class="row">
+          <button class="btn primary" onclick="addNotice()">Add Notice</button>
+          <button class="btn ghost" onclick="clearAll()">Clear All</button>
+        </div>
+      </div>
+
+      <h3 class="section-title">Recent Notices</h3>
+      <div id="adminList" class="list admin-list"></div>
+    </section>
+
+    <!-- USER PANEL -->
+    <section class="card panel hidden" id="userPanel">
+      <header class="panel-header">
+        <div>
+          <h2>InfoBoard</h2>
+          <p class="small muted">Latest notices from Command Hub</p>
+        </div>
+        <div class="controls">
+          <input id="userSearchInput" placeholder="Search notices..." oninput="searchUserNotices()" />
+          <button class="btn danger" onclick="signOut()">Sign Out</button>
+        </div>
+      </header>
+
+      <h3 class="section-title">Recent Notices</h3>
+      <div id="userGrid" class="grid user-grid"></div>
+    </section>
+  </main>
+
+  <template id="adminItemTpl">
+    <div class="admin-item card-sm">
+      <div class="meta">
+        <div class="title"></div>
+        <small class="date muted"></small>
+      </div>
+      <div class="admin-actions">
+        <button class="btn mini" data-action="pin">Pin</button>
+        <button class="btn mini" data-action="edit">Edit</button>
+        <button class="btn mini danger" data-action="delete">Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="userCardTpl">
+    <article class="update-card">
+      <div class="content"></div>
+      <div class="card-footer">
+        <small class="date muted"></small>
+        <div class="right">
+          <button class="btn mini like" title="Like">♡ <span class="count">0</span></button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
